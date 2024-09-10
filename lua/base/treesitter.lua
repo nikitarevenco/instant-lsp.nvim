@@ -1,26 +1,25 @@
-return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	main = "nvim-treesitter.configs",
-	opts = {
-		ensure_installed = {
-			"bash",
-			"c",
-			"diff",
-			"html",
-			"lua",
-			"luadoc",
-			"markdown",
-			"markdown_inline",
-			"query",
-			"vim",
-			"vimdoc",
+return function(opts)
+	return {
+		{
+			"nvim-treesitter/nvim-treesitter",
+			event = "VeryLazy",
+			build = ":TSUpdate",
+			opts = {
+				auto_install = true,
+				ensure_installed = { "diff", "regex", "markdown_inline", "http" },
+				highlight = { enable = true },
+				indent = { enable = true },
+			},
+			config = function(_, opts)
+				local config = require("nvim-treesitter.configs")
+				config.setup(opts)
+			end,
 		},
-		auto_install = true,
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = { "ruby" },
+
+		{
+			"nvim-treesitter/nvim-treesitter-context",
+			event = "VeryLazy",
+			dependencies = { "nvim-treesitter/nvim-treesitter", lazy = true },
 		},
-		indent = { enable = true, disable = { "ruby" } },
-	},
-}
+	}
+end
