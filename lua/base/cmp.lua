@@ -163,7 +163,6 @@ return function(custom_opts)
 						[custom_opts.keys.cmp.select_prev_item] = cmp.mapping.select_prev_item(),
 						[custom_opts.keys.cmp.scroll_docs_up] = cmp.mapping.scroll_docs(-4),
 						[custom_opts.keys.cmp.scoll_docs_down] = cmp.mapping.scroll_docs(4),
-						[custom_opts.keys.cmp.confirm] = cmp.mapping.confirm({ select = true }),
 						[custom_opts.keys.cmp.complete] = cmp.mapping.complete({}),
 						[custom_opts.keys.cmp.goto_next_snippet_placeholder] = cmp.mapping(function()
 							if luasnip.expand_or_locally_jumpable() then

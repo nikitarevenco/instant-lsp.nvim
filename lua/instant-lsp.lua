@@ -30,6 +30,7 @@ local default_options = {
 			scoll_docs_down = "<C-f>",
 			confirm = "<tab>",
 			abort = "<C-e>",
+			complete = "<C-Space>",
 			goto_next_snippet_placeholder = "<C-l>",
 			goto_prev_snippet_placeholder = "<C-h>",
 		},
