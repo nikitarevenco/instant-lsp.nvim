@@ -7,14 +7,6 @@ return function(custom_opts)
 			},
 		},
 		{
-			"williamboman/mason-lspconfig.nvim",
-			opts = {
-				ensure_installed = {
-					"lua_ls",
-				},
-			},
-		},
-		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			opts = {
 				ensure_installed = {

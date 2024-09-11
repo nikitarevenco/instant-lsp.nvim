@@ -76,15 +76,6 @@ return function(custom_opts)
 			},
 		},
 		{
-			"williamboman/mason-lspconfig.nvim",
-			opts = {
-				ensure_installed = {
-					"ts_ls",
-					"vtsls",
-				},
-			},
-		},
-		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			opts = {
 				ensure_installed = {

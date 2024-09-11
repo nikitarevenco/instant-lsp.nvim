@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup(opts)
 	opts = opts or {}
+	opts.misc = opts.misc or {}
 	opts.keys = opts.keys or {}
 	opts.keys.typescript = opts.keys.typescript or {}
 	opts.misc = opts.misc or {}
