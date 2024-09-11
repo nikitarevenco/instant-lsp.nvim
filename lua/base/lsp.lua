@@ -1,65 +1,65 @@
 local function setup_lsp_keymaps(opts, event)
-	vim.keymap.set("n", opts.keys.lsp.toggle_diagnostics or "<leader>ud", function()
+	vim.keymap.set("n", opts.keys.lsp.toggle_diagnostics, function()
 		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 	end, { desc = "toggle diagnostics", noremap = false, silent = true })
 
-	vim.keymap.set("n", opts.keys.lsp.toggle_inlay_hints or "<leader>uh", function()
+	vim.keymap.set("n", opts.keys.lsp.toggle_inlay_hints, function()
 		local filter = {}
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(filter))
 	end, { desc = "Toggle inlay hints", noremap = false, silent = true })
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_definition or "gd",
+		opts.keys.lsp.goto_definition,
 		vim.lsp.buf.definition,
 		{ buffer = event.buf, desc = "LSP: Goto Definition", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_references or "gr",
+		opts.keys.lsp.goto_references,
 		vim.lsp.buf.references,
 		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_implementation or "gI",
+		opts.keys.lsp.goto_implementation,
 		vim.lsp.buf.implementation,
 		{ buffer = event.buf, desc = "LSP: Goto Implementation", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_type_definition or "gt",
+		opts.keys.lsp.goto_type_definition,
 		vim.lsp.buf.type_definition,
 		{ buffer = event.buf, desc = "LSP: Goto Type Definition", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.code_rename or "<leader>cr",
+		opts.keys.lsp.code_rename,
 		vim.lsp.buf.rename,
 		{ buffer = event.buf, desc = "LSP: Code Rename", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.code_action or "<leader>ca",
+		opts.keys.lsp.code_action,
 		vim.lsp.buf.code_action,
 		{ buffer = event.buf, desc = "LSP: Code Action", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.hover_documentation or "K",
+		opts.keys.lsp.hover_documentation,
 		vim.lsp.buf.hover,
 		{ buffer = event.buf, desc = "LSP: Hover Documentation", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_declaration or "gD",
+		opts.keys.lsp.goto_declaration,
 		vim.lsp.buf.declaration,
 		{ buffer = event.buf, desc = "LSP: Goto Declaration", nowait = true }
 	)
@@ -67,10 +67,10 @@ end
 
 return function(custom_opts)
 	local diagnostics_icons = {
-		Error = custom_opts.icons.error or " ",
-		Warn = custom_opts.icons.warn or " ",
-		Hint = custom_opts.icons.hint or " ",
-		Info = custom_opts.icons.info or " ",
+		Error = custom_opts.icons.error,
+		Warn = custom_opts.icons.warn,
+		Hint = custom_opts.icons.hint,
+		Info = custom_opts.icons.info,
 	}
 
 	return {
@@ -86,7 +86,7 @@ return function(custom_opts)
 				underline = false,
 				update_in_insert = false,
 				virtual_text = {
-					prefix = custom_opts.icons.vtext_prefix or "●",
+					prefix = custom_opts.icons.vtext_prefix,
 				},
 				signs = {
 					text = {

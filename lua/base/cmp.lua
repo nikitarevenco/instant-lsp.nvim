@@ -83,7 +83,7 @@ return function(custom_opts)
 
 				return {
 					performance = {
-						max_view_entries = custom_opts.misc.completion_suggestions_count or 3,
+						max_view_entries = custom_opts.misc.completion_suggestions_count,
 					},
 					formatting = {
 						format = function(_, item)
@@ -140,7 +140,7 @@ return function(custom_opts)
 							for key, width in pairs(widths) do
 								if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
 									item[key] = vim.fn.strcharpart(item[key], 0, width - 1)
-										.. (custom_opts.icons.ellipsis or "...")
+										.. (custom_opts.icons.ellipsis)
 								end
 							end
 
@@ -157,20 +157,20 @@ return function(custom_opts)
 						documentation = cmp.config.window.bordered(),
 					},
 					mapping = cmp.mapping.preset.insert({
-						[custom_opts.keys.cmp.abort or "<C-e>"] = cmp.mapping.abort(),
-						[custom_opts.keys.cmp.confirm or "<tab>"] = cmp.mapping.confirm({ select = true }),
-						[custom_opts.keys.cmp.select_next_item or "<C-n>"] = cmp.mapping.select_next_item(),
-						[custom_opts.keys.cmp.select_prev_item or "<C-p>"] = cmp.mapping.select_prev_item(),
-						[custom_opts.keys.cmp.scroll_docs_up or "<C-b>"] = cmp.mapping.scroll_docs(-4),
-						[custom_opts.keys.cmp.scoll_docs_down or "<C-f>"] = cmp.mapping.scroll_docs(4),
-						[custom_opts.keys.cmp.confirm or "<C-y>"] = cmp.mapping.confirm({ select = true }),
-						[custom_opts.keys.cmp.complete or "<C-Space>"] = cmp.mapping.complete({}),
-						[custom_opts.keys.cmp.goto_next_snippet_placeholder or "<C-l>"] = cmp.mapping(function()
+						[custom_opts.keys.cmp.abort] = cmp.mapping.abort(),
+						[custom_opts.keys.cmp.confirm] = cmp.mapping.confirm({ select = true }),
+						[custom_opts.keys.cmp.select_next_item] = cmp.mapping.select_next_item(),
+						[custom_opts.keys.cmp.select_prev_item] = cmp.mapping.select_prev_item(),
+						[custom_opts.keys.cmp.scroll_docs_up] = cmp.mapping.scroll_docs(-4),
+						[custom_opts.keys.cmp.scoll_docs_down] = cmp.mapping.scroll_docs(4),
+						[custom_opts.keys.cmp.confirm] = cmp.mapping.confirm({ select = true }),
+						[custom_opts.keys.cmp.complete] = cmp.mapping.complete({}),
+						[custom_opts.keys.cmp.goto_next_snippet_placeholder] = cmp.mapping(function()
 							if luasnip.expand_or_locally_jumpable() then
 								luasnip.expand_or_jump()
 							end
 						end, { "i", "s" }),
-						[custom_opts.keys.cmp.goto_prev_snippet_placeholder or "<C-h>"] = cmp.mapping(function()
+						[custom_opts.keys.cmp.goto_prev_snippet_placeholder] = cmp.mapping(function()
 							if luasnip.locally_jumpable(-1) then
 								luasnip.jump(-1)
 							end

@@ -1,57 +1,3 @@
-local function setup_typescript_lsp_keymaps(opts_keys_typescript)
-	return {
-		{
-			opts_keys_typescript.goto_source_definition or "gD",
-			function()
-				require("vtsls").commands.goto_source_definition(0)
-			end,
-			desc = "Goto Source Definition",
-		},
-		{
-			opts_keys_typescript.file_references or "gR",
-			function()
-				require("vtsls").commands.file_references(0)
-			end,
-			desc = "File References",
-		},
-		{
-			opts_keys_typescript.organize_imports or "<leader>co",
-			function()
-				require("vtsls").commands.organize_imports(0)
-			end,
-			desc = "Organize Imports",
-		},
-		{
-			opts_keys_typescript.add_missing_imports or "<leader>cM",
-			function()
-				require("vtsls").commands.add_missing_imports(0)
-			end,
-			desc = "Add missing imports",
-		},
-		{
-			opts_keys_typescript.remove_unused_imports or "<leader>cu",
-			function()
-				require("vtsls").commands.remove_unused_imports(0)
-			end,
-			desc = "Remove unused imports",
-		},
-		{
-			opts_keys_typescript.fix_all or "<leader>cD",
-			function()
-				require("vtsls").commands.fix_all(0)
-			end,
-			desc = "Fix all diagnostics",
-		},
-		{
-			opts_keys_typescript.select_ts_version or "<leader>cV",
-			function()
-				require("vtsls").commands.select_ts_version(0)
-			end,
-			desc = "Select TS workspace version",
-		},
-	}
-end
-
 return function(custom_opts)
 	local settings = {
 		updateImportsOnFileMove = { enabled = "always" },
@@ -163,7 +109,57 @@ return function(custom_opts)
 					},
 				},
 			},
-			keys = setup_typescript_lsp_keymaps(custom_opts.keys.typescript),
+			keys = {
+				{
+					custom_opts.keys.typescript.goto_source_definition,
+					function()
+						require("vtsls").commands.goto_source_definition(0)
+					end,
+					desc = "Goto Source Definition",
+				},
+				{
+					custom_opts.keys.typescript.file_references,
+					function()
+						require("vtsls").commands.file_references(0)
+					end,
+					desc = "File References",
+				},
+				{
+					custom_opts.keys.typescript.organize_imports,
+					function()
+						require("vtsls").commands.organize_imports(0)
+					end,
+					desc = "Organize Imports",
+				},
+				{
+					custom_opts.keys.typescript.add_missing_imports,
+					function()
+						require("vtsls").commands.add_missing_imports(0)
+					end,
+					desc = "Add missing imports",
+				},
+				{
+					custom_opts.keys.typescript.remove_unused_imports,
+					function()
+						require("vtsls").commands.remove_unused_imports(0)
+					end,
+					desc = "Remove unused imports",
+				},
+				{
+					custom_opts.keys.typescript.fix_all,
+					function()
+						require("vtsls").commands.fix_all(0)
+					end,
+					desc = "Fix all diagnostics",
+				},
+				{
+					custom_opts.keys.typescript.select_ts_version,
+					function()
+						require("vtsls").commands.select_ts_version(0)
+					end,
+					desc = "Select TS workspace version",
+				},
+			},
 		},
 	}
 end

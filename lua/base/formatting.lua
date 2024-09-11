@@ -18,11 +18,11 @@ return function(custom_opts)
 					end,
 				})
 
-				vim.keymap.set("n", custom_opts.keys.lsp.format or "<cr>", function()
+				vim.keymap.set("n", custom_opts.keys.lsp.format, function()
 					require("conform").format({ async = true, lsp_format = "fallback" })
 				end, { desc = "format" })
 
-				vim.g.auto_format = custom_opts.misc.format_on_save or false
+				vim.g.auto_format = custom_opts.misc.format_on_save
 
 				require("conform").setup(opts)
 			end,

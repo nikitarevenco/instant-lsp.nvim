@@ -8,7 +8,7 @@ return function(custom_opts)
 					format = function(entry, item)
 						item = require("lspkind").cmp_format({
 							maxwidth = 50,
-							ellipsis_char = custom_opts.icons.ellipsis or "...",
+							ellipsis_char = custom_opts.icons.ellipsis,
 						})(entry, item)
 						return require("tailwindcss-colorizer-cmp").formatter(entry, item)
 					end,

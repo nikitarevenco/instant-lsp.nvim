@@ -21,15 +21,13 @@ return function(custom_opts)
 		},
 		custom_opts.disable_feature.ts_autotag and {} or {
 			"windwp/nvim-ts-autotag",
-			config = function()
-				require("nvim-ts-autotag").setup({
-					opts = {
-						enable_close = true,
-						enable_rename = true,
-						enable_close_on_slash = false,
-					},
-				})
-			end,
+			opts = {
+				opts = {
+					enable_close = true,
+					enable_rename = true,
+					enable_close_on_slash = false,
+				},
+			},
 		},
 	}
 end
