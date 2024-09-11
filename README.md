@@ -1,7 +1,7 @@
 # instant-lsp.nvim
 
-> [!NOTE]
-> This plugin is very new so currently has only a few languages, but I plan on adding more in the future
+> [!WARNING]
+> This is a work in progress
 
 Provides a VSCode-like experience of installing new lsp servers. Fox example, with this config we will completely setup completion, snippets, lsp, keymappings:
 
