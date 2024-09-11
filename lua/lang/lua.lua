@@ -1,6 +1,18 @@
 return function(custom_opts)
 	return {
 		{
+			"mfussenegger/nvim-lint",
+			opts = {
+				linters = {
+					luacheck = {
+						condition = function(ctx)
+							return vim.fs.find({ ".luacheckrc" }, { path = ctx.filename, upward = true })[1]
+						end,
+					},
+				},
+			},
+		},
+		{
 			"nvim-treesitter/nvim-treesitter",
 			opts = {
 				ensure_installed = { "lua" },
@@ -11,6 +23,7 @@ return function(custom_opts)
 			opts = {
 				ensure_installed = {
 					"stylua",
+					"luacheck",
 				},
 			},
 		},

@@ -18,12 +18,9 @@ return function(custom_opts)
 					end,
 				})
 
-				vim.keymap.set(
-					"n",
-					custom_opts.keys.lsp.format or "<cr>",
-					'<cmd>lua require("conform").format({ async = true, lsp_format = "fallback" })<cr>',
-					{ desc = "format" }
-				)
+				vim.keymap.set("n", custom_opts.keys.lsp.format or "<cr>", function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
+				end, { desc = "format" })
 
 				vim.g.auto_format = custom_opts.misc.format_on_save or false
 

@@ -1,4 +1,4 @@
-return function(opts)
+return function(custom_opts)
 	return {
 		{
 			"nvim-treesitter/nvim-treesitter",
@@ -15,11 +15,21 @@ return function(opts)
 				config.setup(opts)
 			end,
 		},
-
-		{
+		custom_opts.disable_feature.ts_context and {} or {
 			"nvim-treesitter/nvim-treesitter-context",
-			event = "VeryLazy",
 			dependencies = { "nvim-treesitter/nvim-treesitter", lazy = true },
+		},
+		custom_opts.disable_feature.ts_autotag and {} or {
+			"windwp/nvim-ts-autotag",
+			config = function()
+				require("nvim-ts-autotag").setup({
+					opts = {
+						enable_close = true,
+						enable_rename = true,
+						enable_close_on_slash = false,
+					},
+				})
+			end,
 		},
 	}
 end

@@ -116,7 +116,36 @@ return function(custom_opts)
 				"typescript.tsx",
 			},
 			opts = {
+				attach_handlers = {
+					eslint = function()
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							callback = function(event)
+								local clients = require("tvl.util").get_clients({ bufnr = event.buf, name = "eslint" })
+								local client
+
+								if clients and #clients > 0 then
+									client = clients[1]
+								end
+								if client then
+									local diag = vim.diagnostic.get(
+										event.buf,
+										{ namespace = vim.lsp.diagnostic.get_namespace(client.id) }
+									)
+									if #diag > 0 then
+										vim.cmd("EslintFixAll")
+									end
+								end
+							end,
+						})
+					end,
+				},
 				servers = {
+					eslint = {
+						settings = {
+							-- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+							workingDirectory = { mode = "auto" },
+						},
+					},
 					vtsls = {
 						settings = {
 							complete_function_calls = true,

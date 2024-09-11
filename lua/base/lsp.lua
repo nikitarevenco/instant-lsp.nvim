@@ -73,56 +73,33 @@ return function(custom_opts)
 		Info = custom_opts.icons.info or " ",
 	}
 
-	function serializeTable(val, name, skipnewlines, depth)
-		skipnewlines = skipnewlines or false
-		depth = depth or 0
-
-		local tmp = string.rep(" ", depth)
-
-		if name then
-			tmp = tmp .. name .. " = "
-		end
-
-		if type(val) == "table" then
-			tmp = tmp .. "{" .. (not skipnewlines and "\n" or "")
-
-			for k, v in pairs(val) do
-				tmp = tmp .. serializeTable(v, k, skipnewlines, depth + 1) .. "," .. (not skipnewlines and "\n" or "")
-			end
-
-			tmp = tmp .. string.rep(" ", depth) .. "}"
-		elseif type(val) == "number" then
-			tmp = tmp .. tostring(val)
-		elseif type(val) == "string" then
-			tmp = tmp .. string.format("%q", val)
-		elseif type(val) == "boolean" then
-			tmp = tmp .. (val and "true" or "false")
-		else
-			tmp = tmp .. '"[inserializeable datatype:' .. type(val) .. ']"'
-		end
-
-		return tmp
-	end
 	return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-			{ "j-hui/fidget.nvim", opts = {} },
-
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		config = function(a, b)
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print("1111111111111111")
-			-- print(serializeTable(b.servers))
+		opts = {
+			diagnostics = {
+				underline = false,
+				update_in_insert = false,
+				virtual_text = {
+					prefix = custom_opts.icons.vtext_prefix or "●",
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = diagnostics_icons.Error,
+						[vim.diagnostic.severity.WARN] = diagnostics_icons.Warn,
+						[vim.diagnostic.severity.HINT] = diagnostics_icons.Hint,
+						[vim.diagnostic.severity.INFO] = diagnostics_icons.Info,
+					},
+				},
+			},
+		},
+		config = function(_, opts)
+			vim.diagnostic.config({ virtual_text = not custom_opts.disable_feature.virtual_text })
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -154,12 +131,17 @@ return function(custom_opts)
 				end,
 			})
 
+			for type, icon in pairs(diagnostics_icons) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			end
+
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			require("mason").setup()
 
-      local servers = b.servers or {}
+			local servers = opts.servers or {}
 
 			local ensure_installed = vim.tbl_keys(servers)
 

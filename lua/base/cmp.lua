@@ -23,6 +23,7 @@ return function(custom_opts)
 			opts = function(_, opts)
 				local cmp = require("cmp")
 				require("luasnip.loaders.from_vscode").lazy_load()
+				local luasnip = require("luasnip")
 
 				local sources = opts.sources or {}
 				vim.list_extend(sources, {
@@ -34,7 +35,7 @@ return function(custom_opts)
 						end,
 					},
 					{ name = "path" },
-					{ name = "luasnip" },
+					custom_opts.disable_feature.snippets and {} or { name = "luasnip" },
 					{ name = "buffer" },
 				})
 
@@ -65,21 +66,96 @@ return function(custom_opts)
 					performance = {
 						max_view_entries = custom_opts.misc.completion_suggestions_count or 3,
 					},
-					completion = {
-						completeopt = "menu,menuone,preview,noselect",
+					formatting = {
+						format = function(_, item)
+							local icons = {
+								Array = " ",
+								Boolean = "󰨙 ",
+								Class = " ",
+								Codeium = "󰘦 ",
+								Color = " ",
+								Control = " ",
+								Collapsed = " ",
+								Constant = "󰏿 ",
+								Constructor = " ",
+								Copilot = " ",
+								Enum = " ",
+								EnumMember = " ",
+								Event = " ",
+								Field = " ",
+								File = " ",
+								Folder = " ",
+								Function = "󰊕 ",
+								Interface = " ",
+								Key = " ",
+								Keyword = " ",
+								Method = "󰊕 ",
+								Module = " ",
+								Namespace = "󰦮 ",
+								Null = " ",
+								Number = "󰎠 ",
+								Object = " ",
+								Operator = " ",
+								Package = " ",
+								Property = " ",
+								Reference = " ",
+								Snippet = " ",
+								String = " ",
+								Struct = "󰆼 ",
+								TabNine = "󰏚 ",
+								Text = " ",
+								TypeParameter = " ",
+								Unit = " ",
+								Value = " ",
+								Variable = "󰀫 ",
+							}
+							if icons[item.kind] then
+								item.kind = icons[item.kind] .. item.kind
+							end
+
+							local widths = {
+								abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+								menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+							}
+
+							for key, width in pairs(widths) do
+								if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+									item[key] = vim.fn.strcharpart(item[key], 0, width - 1)
+										.. (custom_opts.icons.ellipsis or "...")
+								end
+							end
+
+							return item
+						end,
 					},
 					snippet = {
 						expand = function(args)
 							require("luasnip").lsp_expand(args.body)
 						end,
 					},
-					window = {
+					window = custom_opts.disable_feature.cmp_border and {} or {
 						completion = cmp.config.window.bordered(),
 						documentation = cmp.config.window.bordered(),
 					},
 					mapping = cmp.mapping.preset.insert({
 						[custom_opts.keys.cmp.abort or "<C-e>"] = cmp.mapping.abort(),
 						[custom_opts.keys.cmp.confirm or "<tab>"] = cmp.mapping.confirm({ select = true }),
+						[custom_opts.keys.cmp.select_next_item or "<C-n>"] = cmp.mapping.select_next_item(),
+						[custom_opts.keys.cmp.select_prev_item or "<C-p>"] = cmp.mapping.select_prev_item(),
+						[custom_opts.keys.cmp.scroll_docs_up or "<C-b>"] = cmp.mapping.scroll_docs(-4),
+						[custom_opts.keys.cmp.scoll_docs_down or "<C-f>"] = cmp.mapping.scroll_docs(4),
+						[custom_opts.keys.cmp.confirm or "<C-y>"] = cmp.mapping.confirm({ select = true }),
+						[custom_opts.keys.cmp.complete or "<C-Space>"] = cmp.mapping.complete({}),
+						[custom_opts.keys.cmp.goto_next_snippet_placeholder or "<C-l>"] = cmp.mapping(function()
+							if luasnip.expand_or_locally_jumpable() then
+								luasnip.expand_or_jump()
+							end
+						end, { "i", "s" }),
+						[custom_opts.keys.cmp.goto_prev_snippet_placeholder or "<C-h>"] = cmp.mapping(function()
+							if luasnip.locally_jumpable(-1) then
+								luasnip.jump(-1)
+							end
+						end, { "i", "s" }),
 					}),
 					sources = cmp.config.sources(sources),
 				}
