@@ -15,7 +15,9 @@ It returns a table of plugin specs for `lazy.nvim`
 ### Installation
 
 ```lua
-local instant_lsp_path = vim.fn.stdpath("data") .. "/lazy/instant-lsp.nvim"
+local instant_lsp_path = vim.fn.stdpath("data") .. "/instant-lsp.nvim"
+
+-- Clone the plugin onto your system
 if not vim.loop.fs_stat(instant_lsp_path) then
 	vim.fn.system({
 		"git",
@@ -25,18 +27,21 @@ if not vim.loop.fs_stat(instant_lsp_path) then
 		instant_lsp_path,
 	})
 end
+
+-- Let neovim recognize the plugin's path so we can require it
 vim.opt.rtp:prepend(instant_lsp_path)
 ```
 
 Then, along with your other plugins, add this:
 
 ```lua
-local OPTIONS = { "lua" } -- see below for default config
+-- This will setup the LSP for all available languages
+local opts = { "lua", "mdx", "tailwind", "typescript", disable_feature = { snippets = true } } -- you can also pass in additional options, see below for default options
 
 local your_plugins = {
   -- your-other-plugin1 { ... },
   -- your-other-plugin2 { ... },
-  require("instant-lsp").setup(OPTIONS),
+  require("instant-lsp").setup(opts),
   -- your-other-plugin4 { ... },
   -- your-other-plugin4 { ... }
 }
