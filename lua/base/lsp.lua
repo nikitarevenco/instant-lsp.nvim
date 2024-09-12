@@ -10,16 +10,16 @@ local function setup_lsp_keymaps(opts, event)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_definition,
-		vim.lsp.buf.definition,
-		{ buffer = event.buf, desc = "LSP: Goto Definition", nowait = true }
+		opts.keys.lsp.goto_declaration,
+		vim.lsp.buf.declaration,
+		{ buffer = event.buf, desc = "LSP: Goto Declaration", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.goto_references,
-		vim.lsp.buf.references,
-		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true }
+		opts.keys.lsp.goto_definition,
+		vim.lsp.buf.definition,
+		{ buffer = event.buf, desc = "LSP: Goto Definition", nowait = true }
 	)
 
 	vim.keymap.set(
@@ -38,16 +38,23 @@ local function setup_lsp_keymaps(opts, event)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.code_rename,
-		vim.lsp.buf.rename,
-		{ buffer = event.buf, desc = "LSP: Code Rename", nowait = true }
+		opts.keys.lsp.code_action,
+		vim.lsp.buf.code_action,
+		{ buffer = event.buf, desc = "LSP: Code Action", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
-		opts.keys.lsp.code_action,
-		vim.lsp.buf.code_action,
-		{ buffer = event.buf, desc = "LSP: Code Action", nowait = true }
+		opts.keys.lsp.code_rename,
+		vim.lsp.buf.rename,
+		{ buffer = event.buf, desc = "LSP: Rename", nowait = true }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.goto_references,
+		vim.lsp.buf.references,
+		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true }
 	)
 
 	vim.keymap.set(
@@ -57,12 +64,21 @@ local function setup_lsp_keymaps(opts, event)
 		{ buffer = event.buf, desc = "LSP: Hover Documentation", nowait = true }
 	)
 
-	vim.keymap.set(
-		"n",
-		opts.keys.lsp.goto_declaration,
-		vim.lsp.buf.declaration,
-		{ buffer = event.buf, desc = "LSP: Goto Declaration", nowait = true }
-	)
+	vim.keymap.set({ "i", "n" }, opts.keys.lsp.hover_diagnostics, function()
+		vim.diagnostic.open_float()
+	end, { buffer = event.buf, desc = "LSP: Hover Diagnostics", nowait = true })
+
+	vim.keymap.set({ "i", "n" }, opts.keys.lsp.signature_help, function()
+		vim.lsp.buf.signature_help()
+	end, { desc = "LSP: Signature Help" })
+
+	vim.keymap.set("n", opts.keys.lsp.goto_next_diagnostic, function()
+		vim.diagnostic.goto_next()
+	end, { desc = "LSP: Jump to the next diagnostic" })
+
+	vim.keymap.set("n", opts.keys.lsp.goto_prev_diagnostic, function()
+		vim.diagnostic.goto_prev()
+	end, { desc = "LSP: Jump to the previous diagnostic" })
 end
 
 return function(custom_opts)

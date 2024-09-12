@@ -38,14 +38,18 @@ local default_options = {
 			format = "<cr>",
 			toggle_diagnostics = "<leader>ud",
 			toggle_inlay_hints = "<leader>uh",
+			signature_help = "<C-s>",
 			goto_definition = "gd",
-			goto_references = "gr",
+			goto_references = "grr",
+			code_rename = "grn",
+			code_action = "gra",
 			goto_implementation = "gI",
 			goto_type_definition = "gt",
-			code_rename = "<leader>cr",
-			code_action = "<leader>ca",
 			hover_documentation = "K",
+			hover_diagnostics = "<C-k>",
 			goto_declaration = "gD",
+			goto_prev_diagnostic = "[d",
+			goto_next_diagnostic = "]d",
 		},
 	},
 	icons = {
@@ -80,8 +84,7 @@ function M.setup(custom_opts)
 	}
 
 	for _, lang in ipairs(custom_opts) do
-		local hello = require("lang." .. lang)(custom_opts)
-		table.insert(specs, hello)
+		table.insert(specs, require("lang." .. lang .. "-lsp")(custom_opts))
 	end
 
 	return specs
