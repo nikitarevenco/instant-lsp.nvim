@@ -2,7 +2,6 @@ return function(custom_opts)
 	return {
 		{
 			"stevearc/conform.nvim",
-			event = "BufWritePre",
 			config = function(_, opts)
 				vim.api.nvim_create_autocmd("BufWritePre", {
 					pattern = "*",
