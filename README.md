@@ -9,8 +9,7 @@ Provides a VSCode-like experience of installing new lsp servers. Fox example, wi
 require("instant-lsp").setup({ "lua", "typescript", "mdx", "tailwind" })
 ```
 
-It's like a meta-plugin, one which configures plugins like `nvim-lspconfig` and `nvim-cmp` for you.
-It returns a table of plugin specs for `lazy.nvim`
+It's like a meta-plugin, one which configures plugins like `nvim-lspconfig`, `conform` and `nvim-cmp` for you.
 
 ### Installation
 
@@ -32,32 +31,30 @@ end
 vim.opt.rtp:prepend(instant_lsp_path)
 ```
 
-Then, along with your other plugins, add this:
+Then, along with your other plugins, add this to setup every language:
 
 ```lua
--- This will setup the LSP for all available languages and disable snippets (for showcase)
--- remove any languages you don't want configured, LSP servers won't be installed for them
-local opts = { "verilog", "shell", "odin", "swift", "r", "perl", "html", "htmx", "nim", "ansible", "csv", "scala", "ruby", "prisma", "powershell", "plantuml", "nushell", "php", "nix", "java", "helm", "haskell", "gleam", "dart", "csharp", "c", "tex", "thrift", "elm", "git", "clojure", "cmake", "css", "astro", "angular", "svelte", "flutter", "dotfiles", "vue", "protobuf", "terraform", "sql", "python", "markdown", "docker", "go", "yaml", "json", "rust", "lua", "mdx", "tailwind", "typescript" }
--- you can also pass in additional options, see below for default options
 
 local your_plugins = {
-  -- your-other-plugin1 { ... },
-  -- your-other-plugin2 { ... },
-  require("instant-lsp").setup(opts),
-  -- your-other-plugin3 { ... },
-  -- your-other-plugin4 { ... }
+  require("instant-lsp").setup({ languages = "all" }),
+  -- the above setup is a shorthand for:
+  -- require("instant-lsp").setup({languages = { "html", "shell", "yaml", "htmx", "json", "csharp", "clojure", "powershell", "odin", "nim", "php", "thrift", "scala", "elm", "css", "c", "swift", "xml", "ansible", "go", "sql", "helm", "haskell", "gleam", "dart", "tex", "astro", "angular", "svelte", "vue", "protobuf", "terraform", "python", "docker", "rust", "lua", "mdx", "tailwind", "typescript", "markdown", "cmake", "java", "verilog", "r", "perl", "csv", "ruby", "prisma", "plantuml", "nushell", "nix", "git" }})
+
+  -- your other plugins go here, e.g.
+  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
 
 -- your lazy.nvim setup stays the same
 require("lazy").setup(your_plugins, --[[ lazy options ]])
 ```
 
-And you are done!
+Or just choose the ones that you want, and you are done!
 
-Here is default config:
+The `setup` function accepts a table with the following default options:
 
 ```lua
 local default_options = {
+  languages = {}, -- see above on how to add languages
 	disable_feature = {
 		snippets = false,
 		virtual_text = false,
