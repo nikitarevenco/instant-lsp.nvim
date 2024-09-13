@@ -30,11 +30,25 @@ Then, along with your other plugins, add this to setup every language:
 
 local your_plugins = {
   require("instant-lsp").setup({ languages = "all" }),
-  -- the above setup is a shorthand for:
-  -- require("instant-lsp").setup({languages = { "html", "shell", "yaml", "htmx", "json", "csharp", "clojure", "powershell", "odin", "nim", "php", "thrift", "scala", "elm", "css", "c", "swift", "xml", "ansible", "go", "sql", "helm", "haskell", "gleam", "dart", "tex", "astro", "angular", "svelte", "vue", "protobuf", "terraform", "python", "docker", "rust", "lua", "mdx", "tailwind", "typescript", "markdown", "cmake", "java", "verilog", "r", "perl", "csv", "ruby", "prisma", "plantuml", "nushell", "nix", "git" }})
+
+  --[[ the above setup is a shorthand for:
+
+  require("instant-lsp").setup({
+    languages = {
+      "html", "shell", "yaml", "htmx", "json", "csharp", "clojure",
+      "powershell", "odin", "nim", "php", "thrift", "scala", "elm",
+      "css", "c", "swift", "xml", "ansible", "go", "sql", "helm",
+      "haskell", "gleam", "dart", "tex", "astro", "angular", "svelte",
+      "vue", "protobuf", "terraform", "python", "docker", "rust",
+      "lua", "mdx", "tailwind", "typescript", "markdown", "cmake",
+      "java", "verilog", "r", "perl", "csv", "ruby", "prisma",
+      "plantuml", "nushell", "nix", "git"
+    }
+  })
 
   -- your other plugins go here, e.g.
-  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+  ]]
 }
 
 -- your lazy.nvim setup stays the same
