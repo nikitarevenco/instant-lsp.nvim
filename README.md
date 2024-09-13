@@ -1,15 +1,7 @@
 # instant-lsp.nvim
 
-> [!WARNING]
-> This is a work in progress
-
-Provides a VSCode-like experience of installing new lsp servers. Fox example, with this config we will completely setup completion, snippets, lsp, keymappings:
-
-```lua
-require("instant-lsp").setup({ "lua", "typescript", "mdx", "tailwind" })
-```
-
-It's like a meta-plugin, one which configures plugins like `nvim-lspconfig`, `conform` and `nvim-cmp` for you.
+This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 52 available languages
+You can choose which languages to include rather than everything!
 
 ### Installation
 
