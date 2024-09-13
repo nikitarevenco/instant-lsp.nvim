@@ -1,6 +1,7 @@
 # instant-lsp.nvim
 
 This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 52 available languages
+
 You can choose which languages to include rather than everything!
 
 ### Installation
