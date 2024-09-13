@@ -100,7 +100,7 @@ function M.setup(custom_opts)
 	}
 
 	for _, lang in ipairs(custom_opts) do
-		table.insert(specs, require("instant-lsp.lang." .. lang .. "-lsp")(custom_opts))
+		table.insert(specs, require("instant-lsp.lang." .. lang)(custom_opts))
 	end
 
 	return specs
