@@ -35,16 +35,21 @@ vim.opt.rtp:prepend(instant_lsp_path)
 Then, along with your other plugins, add this:
 
 ```lua
--- This will setup the LSP for all available languages
-local opts = { "lua", "mdx", "tailwind", "typescript", disable_feature = { snippets = true } } -- you can also pass in additional options, see below for default options
+-- This will setup the LSP for all available languages and disable snippets (for showcase)
+-- remove any languages you don't want configured, LSP servers won't be installed for them
+local opts = { "verilog", "shell", "odin", "swift", "r", "perl", "html", "htmx", "nim", "ansible", "csv", "scala", "ruby", "prisma", "powershell", "plantuml", "nushell", "php", "nix", "java", "helm", "haskell", "gleam", "dart", "csharp", "c", "tex", "thrift", "elm", "git", "clojure", "cmake", "css", "astro", "angular", "svelte", "flutter", "dotfiles", "vue", "protobuf", "terraform", "sql", "python", "markdown", "docker", "go", "yaml", "json", "rust", "lua", "mdx", "tailwind", "typescript" }
+-- you can also pass in additional options, see below for default options
 
 local your_plugins = {
   -- your-other-plugin1 { ... },
   -- your-other-plugin2 { ... },
   require("instant-lsp").setup(opts),
-  -- your-other-plugin4 { ... },
+  -- your-other-plugin3 { ... },
   -- your-other-plugin4 { ... }
 }
+
+-- your lazy.nvim setup stays the same
+require("lazy").setup(your_plugins, --[[ lazy options ]])
 ```
 
 And you are done!

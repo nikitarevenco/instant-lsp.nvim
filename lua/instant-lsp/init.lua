@@ -8,12 +8,24 @@ local default_options = {
 		ts_context = false,
 		ts_autotag = false,
 		autopairs = false,
+		-- Will not use fzf-lua plugin for some LSP commands like "go to references"
+		fzf_lua = false,
 	},
 	misc = {
 		format_on_save = false,
 		completion_suggestions_count = 3,
 	},
 	keys = {
+		flutter = {
+			start = "<leader>cs",
+			devices = "<leader>ce",
+			emulators = "<leader>ce",
+			reload = "<leader>cl",
+			restart = "<leader>cr",
+			quit = "<leader>cq",
+			detach = "<leader>cd",
+			rename = "<leader>cr",
+		},
 		typescript = {
 			goto_source_definition = "gD",
 			file_references = "gR",
@@ -40,7 +52,6 @@ local default_options = {
 			toggle_inlay_hints = "<leader>uh",
 			signature_help = "<C-s>",
 			goto_definition = "gd",
-			goto_references = "grr",
 			code_rename = "grn",
 			code_action = "gra",
 			goto_implementation = "gI",
@@ -50,6 +61,10 @@ local default_options = {
 			goto_declaration = "gD",
 			goto_prev_diagnostic = "[d",
 			goto_next_diagnostic = "]d",
+			-- these will use fzf-lua if enabled
+			goto_references = "grr",
+			document_symbols = "grd",
+			workspace_symbols = "grs",
 		},
 	},
 	icons = {
@@ -77,14 +92,15 @@ function M.setup(custom_opts)
 	setmetatable_recursive(custom_opts, default_options)
 
 	local specs = {
-		require("base.lsp")(custom_opts),
-		require("base.cmp")(custom_opts),
-		require("base.treesitter")(custom_opts),
-		require("base.formatting")(custom_opts),
+		require("instant-lsp.base.lsp")(custom_opts),
+		require("instant-lsp.base.cmp")(custom_opts),
+		require("instant-lsp.base.treesitter")(custom_opts),
+		require("instant-lsp.base.formatting")(custom_opts),
+		require("instant-lsp.base.linting")(custom_opts),
 	}
 
 	for _, lang in ipairs(custom_opts) do
-		table.insert(specs, require("lang." .. lang .. "-lsp")(custom_opts))
+		table.insert(specs, require("instant-lsp.lang." .. lang .. "-lsp")(custom_opts))
 	end
 
 	return specs

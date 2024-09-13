@@ -53,8 +53,22 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.goto_references,
-		vim.lsp.buf.references,
-		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true }
+		opts.disable_feature.fzf_lua and vim.lsp.buf.references or "<cmd>FzfLua lsp_references<cr>",
+		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.document_symbols,
+		opts.disable_feature.fzf_lua and vim.lsp.buf.document_symbol or "<cmd>FzfLua lsp_document_symbols<cr>",
+		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.workspace_symbols,
+		opts.disable_feature.fzf_lua and vim.lsp.buf.workspace_symbol or "<cmd>FzfLua lsp_workspace_symbols<cr>",
+		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
 	)
 
 	vim.keymap.set(

@@ -1,7 +1,7 @@
 return function(custom_opts)
 	return {
 		{
-			                          "yioneko/nvim-cmp",
+			"yioneko/nvim-cmp",
 			dependencies = { "onsails/lspkind.nvim", { "roobert/tailwindcss-colorizer-cmp.nvim", config = true } },
 			opts = {
 				formatting = {
