@@ -61,7 +61,7 @@ The `setup` function accepts a table with the following default options:
 
 ```lua
 local default_options = {
-  languages = {}, -- see above on how to add languages
+  languages = {},
 	disable_feature = {
 		snippets = false,
 		virtual_text = false,
@@ -69,12 +69,24 @@ local default_options = {
 		ts_context = false,
 		ts_autotag = false,
 		autopairs = false,
+		-- Will not use fzf-lua plugin for some LSP commands like "go to references"
+		fzf_lua = false,
 	},
 	misc = {
 		format_on_save = false,
 		completion_suggestions_count = 3,
 	},
 	keys = {
+		flutter = {
+			start = "<leader>cs",
+			devices = "<leader>ce",
+			emulators = "<leader>ce",
+			reload = "<leader>cl",
+			restart = "<leader>cr",
+			quit = "<leader>cq",
+			detach = "<leader>cd",
+			rename = "<leader>cr",
+		},
 		typescript = {
 			goto_source_definition = "gD",
 			file_references = "gR",
@@ -91,6 +103,7 @@ local default_options = {
 			scoll_docs_down = "<C-f>",
 			confirm = "<tab>",
 			abort = "<C-e>",
+			complete = "<C-Space>",
 			goto_next_snippet_placeholder = "<C-l>",
 			goto_prev_snippet_placeholder = "<C-h>",
 		},
@@ -98,14 +111,21 @@ local default_options = {
 			format = "<cr>",
 			toggle_diagnostics = "<leader>ud",
 			toggle_inlay_hints = "<leader>uh",
+			signature_help = "<C-s>",
 			goto_definition = "gd",
-			goto_references = "gr",
+			code_rename = "grn",
+			code_action = "gra",
 			goto_implementation = "gI",
 			goto_type_definition = "gt",
-			code_rename = "<leader>cr",
-			code_action = "<leader>ca",
 			hover_documentation = "K",
+			hover_diagnostics = "<C-k>",
 			goto_declaration = "gD",
+			goto_prev_diagnostic = "[d",
+			goto_next_diagnostic = "]d",
+			-- these will use fzf-lua if enabled
+			goto_references = "grr",
+			document_symbols = "grd",
+			workspace_symbols = "grs",
 		},
 	},
 	icons = {
