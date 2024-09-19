@@ -6,23 +6,30 @@ return function(custom_opts)
 			dependencies = {
 				"hrsh7th/nvim-cmp",
 			},
-			config = function()
-				require("nvim-autopairs").setup({
-					check_ts = true,
-					ts_config = {
-						lua = { "string" },
-						javascript = { "template_string" },
-						java = false,
-					},
-				})
+			opts = {
+				check_ts = true,
+				ts_config = {
+					lua = { "string" },
+					javascript = { "template_string" },
+					java = false,
+				},
+			},
+			config = function(_, opts)
+				require("nvim-autopairs").setup(opts)
+
+				local Rule = require("nvim-autopairs.rule")
+				local npairs = require("nvim-autopairs")
+
+				-- markdown
+				npairs.add_rule(Rule("*", "*", "markdown"))
 
 				require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 			end,
 		},
 		{
-			  "yioneko/nvim-cmp",
-  branch = "perf",
-  event = "InsertEnter",
+			"yioneko/nvim-cmp",
+			branch = "perf",
+			event = "InsertEnter",
 			dependencies = {
 				{ "hrsh7th/cmp-buffer" },
 				{ "hrsh7th/cmp-path" },
@@ -142,7 +149,7 @@ return function(custom_opts)
 							for key, width in pairs(widths) do
 								if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
 									item[key] = vim.fn.strcharpart(item[key], 0, width - 1)
-										.. (custom_opts.icons.ellipsis)
+										.. custom_opts.icons.ellipsis
 								end
 							end
 
