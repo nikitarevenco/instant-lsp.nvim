@@ -20,8 +20,9 @@ return function(custom_opts)
 				local Rule = require("nvim-autopairs.rule")
 				local npairs = require("nvim-autopairs")
 
-				-- markdown
 				npairs.add_rule(Rule("*", "*", "markdown"))
+				npairs.add_rule(Rule("!=", "=", { "typescript", "typescriptreact", "javascript" }))
+				npairs.add_rule(Rule("==", "=", { "typescript", "typescriptreact", "javascript" }))
 
 				require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 			end,
