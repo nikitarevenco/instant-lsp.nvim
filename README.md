@@ -145,3 +145,15 @@ local default_options = {
 	},
 }
 ```
+
+### How this is implemented
+
+The plugin iterates through every string in the `languages` table that you pass to the setup function and looks for that file in `/lua/instant-lsp/lang/[lang].lua
+
+The file will return a function, it gets called with your custom configuration as an argument, and returns the table of plugins, aka `LazySpec[]` that lazy.nvim accepts
+
+We then take all those `LazySpec[]` and combine them into a `LazySpec[][]` which is the table that this plugin returns, which goes directly into your lazy.nvim config.
+
+The best part is the fact that `lazy.nvim` merges fields like `opts` in each of the plugins. This means I can call the `lspconfig` plugin in all 49 files, and provide the configs for the language servers separately
+
+Lazy.nvim will then merge all these `opts` into a single giant `opts` object, which means its also super easy to extend functionality of this plugin with your own additions (although PRs are super welcome!)
