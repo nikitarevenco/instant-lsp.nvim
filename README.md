@@ -3,7 +3,7 @@
 > [!NOTE]
 > This plugin is in beta!
 
-This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 49 available languages
+This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 49 available languages (also includes linters, formatters, completion, customisable keybindings for a lot of languages)
 
 You can choose which languages to include rather than everything!
 
