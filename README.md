@@ -1,6 +1,9 @@
 # instant-lsp.nvim
 
-This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 52 available languages
+> [!NOTE]
+> This plugin is in beta!
+
+This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 49 available languages
 
 You can choose which languages to include rather than everything!
 
@@ -37,12 +40,12 @@ local your_plugins = {
     languages = {
       "html", "shell", "yaml", "htmx", "json", "csharp", "clojure",
       "powershell", "odin", "nim", "php", "thrift", "scala", "elm",
-      "css", "c", "swift", "xml", "ansible", "go", "sql", "helm",
-      "haskell", "gleam", "dart", "tex", "astro", "angular", "svelte",
+      "css", "c", "xml", "ansible", "go", "sql", "helm",
+      "haskell", "dart", "tex", "astro", "angular", "svelte",
       "vue", "protobuf", "terraform", "python", "docker", "rust",
       "lua", "mdx", "tailwind", "typescript", "markdown", "cmake",
       "java", "verilog", "r", "perl", "csv", "ruby", "prisma",
-      "plantuml", "nushell", "nix", "git"
+      "plantuml", "nix", "git"
     }
   })
 
@@ -56,6 +59,8 @@ require("lazy").setup(your_plugins, --[[ lazy options ]])
 ```
 
 Or just choose the ones that you want, and you are done!
+
+### Configuration
 
 The `setup` function accepts a table with the following default options:
 

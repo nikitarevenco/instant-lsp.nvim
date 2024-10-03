@@ -8,7 +8,7 @@ return function(custom_opts)
 			"neovim/nvim-lspconfig",
 			opts = {
 				servers = {
-					gleam = {},
+					gleamls = {},
 				},
 			},
 		},

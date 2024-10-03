@@ -31,25 +31,5 @@ return function(custom_opts)
 				end
 			end,
 		},
-		{
-			"kristijanhusak/vim-dadbod-completion",
-			dependencies = "vim-dadbod",
-			ft = sql_ft,
-			init = function()
-				vim.api.nvim_create_autocmd("FileType", {
-					pattern = sql_ft,
-					callback = function()
-						local cmp = require("cmp")
-
-						local sources = vim.tbl_map(function(source)
-							return { name = source.name }
-						end, cmp.get_config().sources)
-						table.insert(sources, { name = "vim-dadbod-completion" })
-
-						cmp.setup.buffer({ sources = sources })
-					end,
-				})
-			end,
-		},
 	}
 end

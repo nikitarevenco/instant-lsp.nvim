@@ -10,7 +10,6 @@ return function(custom_opts)
 				"nvim-lua/plenary.nvim",
 				"stevearc/dressing.nvim",
 			},
-			event = "LazyFile",
 			cmd = {
 				"FlutterRun",
 				"FlutterDevices",
