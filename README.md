@@ -60,6 +60,8 @@ require("lazy").setup(your_plugins, --[[ lazy options ]])
 
 Or just choose the ones that you want, and you are done!
 
+**Note:** You'll likely need to install quite a few languages on your system if you choose the `all` options. e.g. you might need to install R, Rust, Ruby and others if you don't have them. If you don't want to do this, don't use `all` and just choose the languages you _do_ want!
+
 ### Configuration
 
 The `setup` function accepts a table with the following default options:
