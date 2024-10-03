@@ -77,7 +77,60 @@ local default_options = {
 	},
 }
 
-local languages = { "html", "shell", "yaml", "htmx", "json", "csharp", "clojure", "powershell", "odin", "nim", "php", "thrift", "scala", "elm", "css", "c", "swift", "xml", "ansible", "go", "sql", "helm", "haskell", "gleam", "dart", "tex", "astro", "angular", "svelte", "vue", "protobuf", "terraform", "python", "docker", "rust", "lua", "mdx", "tailwind", "typescript", "markdown", "cmake", "java", "verilog", "r", "perl", "csv", "ruby", "prisma", "plantuml", "nushell", "nix", "git" }
+local languages = {
+	"html",
+	"shell",
+	"yaml",
+	"htmx",
+	"json",
+	"csharp",
+	"clojure",
+	"powershell",
+	"odin",
+	"nim",
+	"php",
+	"thrift",
+	"scala",
+	"elm",
+	"css",
+	"c",
+	"swift",
+	"xml",
+	"ansible",
+	"go",
+	"sql",
+	"helm",
+	"haskell",
+	"gleam",
+	"dart",
+	"tex",
+	"astro",
+	"angular",
+	"svelte",
+	"vue",
+	"protobuf",
+	"terraform",
+	"python",
+	"docker",
+	"rust",
+	"lua",
+	"mdx",
+	"tailwind",
+	"typescript",
+	"markdown",
+	"cmake",
+	"java",
+	"verilog",
+	"r",
+	"perl",
+	"csv",
+	"ruby",
+	"prisma",
+	"plantuml",
+	"nushell",
+	"nix",
+	"git",
+}
 
 local function setmetatable_recursive(tbl, default)
 	local mt = { __index = default }
@@ -102,7 +155,7 @@ function M.setup(custom_opts)
 	}
 
 	for _, lang in ipairs(custom_opts.languages == "all" and languages or custom_opts.languages) do
-		  table.insert(specs, require("instant-lsp.lang." .. lang)(custom_opts))
+		table.insert(specs, require("instant-lsp.lang." .. lang)(custom_opts))
 	end
 
 	return specs
