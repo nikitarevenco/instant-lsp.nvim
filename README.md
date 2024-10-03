@@ -62,6 +62,8 @@ Or just choose the ones that you want, and you are done!
 
 **Note:** You'll likely need to install quite a few languages on your system if you choose the `all` options. e.g. you might need to install R, Rust, Ruby and others if you don't have them. If you don't want to do this, don't use `all` and just choose the languages you _do_ want!
 
+Also, lets say you ask for 15 lsps out of the 49 available. Those 34 other files will just not be required at all, so this plugin won't unnecesserily download LSPs if you don't specify them.
+
 ### Configuration
 
 The `setup` function accepts a table with the following default options:
