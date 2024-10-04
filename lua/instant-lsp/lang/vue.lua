@@ -3,7 +3,7 @@ return function(custom_opts)
 		{
 			"williamboman/mason.nvim",
 			opts = {
-				ensure_installed = "black",
+				ensure_installed = "vue-language-server",
 			},
 		},
 
