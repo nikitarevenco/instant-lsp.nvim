@@ -6,7 +6,6 @@ return function(custom_opts)
 			opts = {
 				ensure_installed = {
 					"shfmt",
-					"shellcheck",
 				},
 			},
 		},
@@ -16,16 +15,6 @@ return function(custom_opts)
 			opts = {
 				formatters_by_ft = {
 					sh = { "shfmt" },
-				},
-			},
-		},
-
-		{
-			"mfussenegger/nvim-lint",
-			ft = { "sh" },
-			opts = {
-				linters_by_ft = {
-					sh = { "shellcheck" },
 				},
 			},
 		},

@@ -13,13 +13,5 @@ return function(custom_opts)
 				},
 			},
 		},
-		{
-			"williamboman/mason-lspconfig.nvim",
-			opts = {
-				ensure_installed = {
-					"mdx_analyzer",
-				},
-			},
-		},
 	}
 end

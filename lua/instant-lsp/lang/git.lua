@@ -7,7 +7,7 @@ return function(custom_opts)
 		{
 			"nvim-cmp",
 			dependencies = {
-				{ "petertriho/cmp-git", opts = {} },
+				{ "petertriho/cmp-git", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
 			},
 			opts = function(_, opts)
 				table.insert(opts.sources, { name = "git" })
