@@ -6,7 +6,6 @@ return function(custom_opts)
 			build = ":TSUpdate",
 			opts = {
 				auto_install = true,
-				ensure_installed = { "diff", "regex", "markdown_inline", "http" },
 				highlight = { enable = true },
 				indent = { enable = true },
 			},
@@ -22,6 +21,9 @@ return function(custom_opts)
 		custom_opts.disable_feature.ts_autotag and {} or {
 			"windwp/nvim-ts-autotag",
 			opts = {
+        aliases = {
+          ["mdx"] = "html",
+        },
 				opts = {
 					enable_close = true,
 					enable_rename = true,

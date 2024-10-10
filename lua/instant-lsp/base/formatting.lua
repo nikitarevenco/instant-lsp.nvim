@@ -7,7 +7,7 @@ return function(custom_opts)
 				vim.api.nvim_create_autocmd("BufWritePre", {
 					pattern = "*",
 					callback = function(args)
-						if vim.g.auto_format then
+						if vim.g.auto_format or custom_opts.misc.format_on_save then
 							require("conform").format({
 								bufnr = args.buf,
 								timeout_ms = 5000,

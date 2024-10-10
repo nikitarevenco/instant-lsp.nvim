@@ -8,12 +8,12 @@ local default_options = {
 		ts_context = false,
 		ts_autotag = false,
 		autopairs = false,
-		-- Will not use fzf-lua plugin for some LSP commands like "go to references"
+    -- When set to `false`, it will use fzf-lua plugin for some LSP commands like "find references" or "find symbols"
 		fzf_lua = false,
 	},
 	misc = {
 		format_on_save = false,
-		completion_suggestions_count = 3,
+		completion_suggestions_count = 5,
 	},
 	keys = {
 		flutter = {
@@ -36,11 +36,11 @@ local default_options = {
 			select_ts_version = "<leader>cV",
 		},
 		cmp = {
-			select_next_item = "<C-n>",
-			select_prev_item = "<C-p>",
-			scroll_docs_up = "<C-b>",
-			scoll_docs_down = "<C-f>",
-			confirm = "<tab>",
+			scroll_docs_up = "<C-k>",
+			scoll_docs_down = "<C-j>",
+			confirm = "<cr>",
+			select_next_item = "<tab>",
+			select_prev_item = "<s-tab>",
 			abort = "<C-e>",
 			complete = "<C-Space>",
 			goto_next_snippet_placeholder = "<C-l>",
@@ -149,6 +149,7 @@ function M.setup(custom_opts)
 		require("instant-lsp.base.treesitter")(custom_opts),
 		require("instant-lsp.base.formatting")(custom_opts),
 		require("instant-lsp.base.linting")(custom_opts),
+		require("instant-lsp.base.fzf")(custom_opts),
 	}
 
 	for _, lang in ipairs(custom_opts.languages == "all" and languages or custom_opts.languages) do

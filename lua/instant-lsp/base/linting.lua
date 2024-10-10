@@ -5,31 +5,6 @@ return function(custom_opts)
 			event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 			opts = {
 				events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-				linters_by_ft = {
-					-- markdown = { "vale" },
-					-- lua = { "luacheck" },
-					-- Use the "*" filetype to run linters on all filetypes.
-					-- ['*'] = { 'global linter' },
-					-- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
-					-- ['_'] = { 'fallback linter' },
-					-- ["*"] = { "typos" },
-				},
-				---@type table<string,table>
-				linters = {
-					-- -- Example of using selene only when a selene.toml file is present
-					-- selene = {
-					--   -- `condition` is another LazyVim extension that allows you to
-					--   -- dynamically enable/disable linters based on the context.
-					--   condition = function(ctx)
-					--     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
-					--   end,
-					-- },
-					luacheck = {
-						condition = function(ctx)
-							return vim.fs.find({ ".luacheckrc" }, { path = ctx.filename, upward = true })[1]
-						end,
-					},
-				},
 			},
 			config = function(_, opts)
 				local M = {}
@@ -42,12 +17,14 @@ return function(custom_opts)
 						lint.linters[name] = linter
 					end
 				end
+
 				lint.linters_by_ft = opts.linters_by_ft
 
 				function M.debounce(ms, fn)
 					local timer = vim.uv.new_timer()
 					return function(...)
 						local argv = { ... }
+
 						timer:start(ms, 0, function()
 							timer:stop()
 							vim.schedule_wrap(fn)(unpack(argv))
@@ -72,6 +49,7 @@ return function(custom_opts)
 					-- Filter out linters that don't exist or don't match the condition.
 					local ctx = { filename = vim.api.nvim_buf_get_name(0) }
 					ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
+
 					names = vim.tbl_filter(function(name)
 						local linter = lint.linters[name]
 						if not linter then
