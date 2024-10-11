@@ -8,7 +8,7 @@ local default_options = {
 		ts_context = false,
 		ts_autotag = false,
 		autopairs = false,
-    -- When set to `false`, it will use fzf-lua plugin for some LSP commands like "find references" or "find symbols"
+		-- When set to `false`, it will use fzf-lua plugin for some LSP commands like "find references" or "find symbols"
 		fzf_lua = false,
 	},
 	misc = {
@@ -17,23 +17,24 @@ local default_options = {
 	},
 	keys = {
 		flutter = {
-			start = "<leader>cs",
-			devices = "<leader>ce",
-			emulators = "<leader>ce",
-			reload = "<leader>cl",
-			restart = "<leader>cr",
-			quit = "<leader>cq",
-			detach = "<leader>cd",
-			rename = "<leader>cr",
+			start = "<leader>fs",
+			devices = "<leader>fd",
+			emulators = "<leader>fe",
+			reload = "<leader>fl",
+			restart = "<leader>fr",
+			quit = "<leader>fq",
+			detach = "<leader>fx",
+			rename = "<leader>fn",
 		},
 		typescript = {
+			-- override lsp.goto_declaration, since that option is not available in typescript
 			goto_source_definition = "gD",
-			file_references = "gR",
-			organize_imports = "<leader>co",
-			add_missing_imports = "<leader>cM",
-			remove_unused_imports = "<leader>cu",
-			fix_all = "<leader>cD",
-			select_ts_version = "<leader>cV",
+			file_references = "<leader>tr",
+			organize_imports = "<leader>to",
+			add_missing_imports = "<leader>ta",
+			remove_unused_imports = "<leader>ti",
+			fix_all = "<leader>tf",
+			select_ts_version = "<leader>ts",
 		},
 		cmp = {
 			scroll_docs_up = "<C-k>",
@@ -46,25 +47,28 @@ local default_options = {
 			goto_next_snippet_placeholder = "<C-l>",
 			goto_prev_snippet_placeholder = "<C-h>",
 		},
+		-- default: default keybinding as set by neovim in https://github.com/neovim/neovim/blob/master/runtime/lua/vim/_defaults.lua
+		-- fzf-lua: will use fzf-lua if that feature is not disabled in "disable_feature"
 		lsp = {
-			format = "<cr>",
-			toggle_diagnostics = "<leader>ud",
-			toggle_inlay_hints = "<leader>uh",
-			signature_help = "<C-s>",
+			signature_help = "<C-s>", -- default
 			goto_definition = "gd",
-			code_rename = "grn",
-			code_action = "gra",
 			goto_implementation = "gI",
 			goto_type_definition = "gt",
 			hover_documentation = "K",
-			hover_diagnostics = "<C-k>",
+			hover_diagnostics = "<c-w><c-d>", -- default
 			goto_declaration = "gD",
-			goto_prev_diagnostic = "[d",
-			goto_next_diagnostic = "]d",
-			-- these will use fzf-lua if enabled
-			goto_references = "grr",
-			document_symbols = "grd",
-			workspace_symbols = "grs",
+			goto_prev_diagnostic = "[d", -- default
+			goto_next_diagnostic = "]d", -- default
+			goto_first_diagnostic = "[D", -- default
+			goto_last_diagnostic = "]D", -- default
+			format = "<cr>",
+			toggle_diagnostics = "<leader>ld",
+			toggle_inlay_hints = "<leader>lh",
+			code_rename = "grn", -- default
+			code_action = "gra", -- default
+			goto_references = "grr", -- default fzf-lua
+			document_symbols = "<leader>ld", -- fzf-lua
+			workspace_symbols = "<leader>lw", -- fzf-lua
 		},
 	},
 	icons = {

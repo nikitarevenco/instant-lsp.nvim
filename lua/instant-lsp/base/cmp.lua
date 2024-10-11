@@ -93,68 +93,6 @@ return function(custom_opts)
 					performance = {
 						max_view_entries = custom_opts.misc.completion_suggestions_count,
 					},
-					formatting = {
-						format = function(_, item)
-							local icons = {
-								Array = " ",
-								Boolean = "󰨙 ",
-								Class = " ",
-								Codeium = "󰘦 ",
-								Color = " ",
-								Control = " ",
-								Collapsed = " ",
-								Constant = "󰏿 ",
-								Constructor = " ",
-								Copilot = " ",
-								Enum = " ",
-								EnumMember = " ",
-								Event = " ",
-								Field = " ",
-								File = " ",
-								Folder = " ",
-								Function = "󰊕 ",
-								Interface = " ",
-								Key = " ",
-								Keyword = " ",
-								Method = "󰊕 ",
-								Module = " ",
-								Namespace = "󰦮 ",
-								Null = " ",
-								Number = "󰎠 ",
-								Object = " ",
-								Operator = " ",
-								Package = " ",
-								Property = " ",
-								Reference = " ",
-								Snippet = " ",
-								String = " ",
-								Struct = "󰆼 ",
-								TabNine = "󰏚 ",
-								Text = " ",
-								TypeParameter = " ",
-								Unit = " ",
-								Value = " ",
-								Variable = "󰀫 ",
-							}
-							if icons[item.kind] then
-								item.kind = icons[item.kind] .. item.kind
-							end
-
-							local widths = {
-								abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
-								menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
-							}
-
-							for key, width in pairs(widths) do
-								if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
-									item[key] = vim.fn.strcharpart(item[key], 0, width - 1)
-										.. custom_opts.icons.ellipsis
-								end
-							end
-
-							return item
-						end,
-					},
 					snippet = {
 						expand = function(args)
 							require("luasnip").lsp_expand(args.body)

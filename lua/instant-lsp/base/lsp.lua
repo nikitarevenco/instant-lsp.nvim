@@ -61,14 +61,14 @@ local function setup_lsp_keymaps(opts, event)
 		"n",
 		opts.keys.lsp.document_symbols,
 		opts.disable_feature.fzf_lua and vim.lsp.buf.document_symbol or "<cmd>FzfLua lsp_document_symbols<cr>",
-		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
+		{ buffer = event.buf, desc = "LSP: Document Symbols", nowait = true, expr = opts.disable_feature.fzf_lua }
 	)
 
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.workspace_symbols,
 		opts.disable_feature.fzf_lua and vim.lsp.buf.workspace_symbol or "<cmd>FzfLua lsp_workspace_symbols<cr>",
-		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
+		{ buffer = event.buf, desc = "LSP: Workspace Symbols", nowait = true, expr = opts.disable_feature.fzf_lua }
 	)
 
 	vim.keymap.set(
@@ -93,6 +93,14 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set("n", opts.keys.lsp.goto_prev_diagnostic, function()
 		vim.diagnostic.goto_prev()
 	end, { desc = "LSP: Jump to the previous diagnostic" })
+
+	vim.keymap.set("n", opts.keys.lsp.goto_last_diagnostic, function()
+		vim.diagnostic.jump({ count = math.huge, wrap = false })
+	end, { desc = "LSP: Jump to the last diagnostic in the current buffer" })
+
+	vim.keymap.set("n", opts.keys.lsp.goto_first_diagnostic, function()
+		vim.diagnostic.jump({ count = math.huge, wrap = false })
+	end, { desc = "LSP: Jump to the last diagnostic in the current buffer" })
 end
 
 return function(custom_opts)
