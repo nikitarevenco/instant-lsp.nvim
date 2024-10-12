@@ -63,12 +63,12 @@ local default_options = {
 			code_action = "gra", -- default-11
 			goto_references = "grr", -- default-11
 			goto_implementation = "gri", -- default-11
-      outgoing_calls = "gro",
+      outgoing_calls = "grC",
       incoming_calls = "grc",
 			goto_type_definition = "grt",
       type_hierarchy = "grh",
-			document_symbols = "grS",
-			workspace_symbols = "grs",
+			document_symbols = "grs",
+			workspace_symbols = "grS",
 		},
 	},
 	icons = {
