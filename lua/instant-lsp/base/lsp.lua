@@ -39,7 +39,28 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.code_action,
-		vim.lsp.buf.code_action,
+		opts.disable_feature.fzf_lua and vim.lsp.buf.incoming_calls or "<cmd>FzfLua lsp_incoming_calls<cr>",
+		{ buffer = event.buf, desc = "LSP: Incoming Calls", nowait = true }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.type_hierarchy,
+		vim.lsp.buf.typehierarchy,
+		{ buffer = event.buf, desc = "LSP: Type Hierarchy", nowait = true }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.code_action,
+		opts.disable_feature.fzf_lua and vim.lsp.buf.outgoing_calls or "<cmd>FzfLua lsp_outgoing_calls<cr>",
+		{ buffer = event.buf, desc = "LSP: Outgoing Calls", nowait = true }
+	)
+
+	vim.keymap.set(
+		"n",
+		opts.keys.lsp.code_action,
+		opts.disable_feature.fzf_lua and vim.lsp.buf.code_action or "<cmd>FzfLua lsp_code_actions<cr>",
 		{ buffer = event.buf, desc = "LSP: Code Action", nowait = true }
 	)
 
@@ -67,7 +88,8 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.workspace_symbols,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.workspace_symbol or "<cmd>FzfLua lsp_workspace_symbols<cr>",
+		opts.disable_feature.fzf_lua and vim.lsp.buf.workspace_symbol
+			or "<cmd>lua require('fzf-lua').lsp_workspace_symbols({ file_ignore_patterns = { '.contentlayer', '.next' } })<cr>",
 		{ buffer = event.buf, desc = "LSP: Workspace Symbols", nowait = true, expr = opts.disable_feature.fzf_lua }
 	)
 

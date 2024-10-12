@@ -34,7 +34,7 @@ local default_options = {
 			add_missing_imports = "<leader>ta",
 			remove_unused_imports = "<leader>ti",
 			fix_all = "<leader>tf",
-			select_ts_version = "<leader>ts",
+			select_ts_version = "<nop>", -- not useful, included just for completeness. if you need to feel free to use any of your own keybindings
 		},
 		cmp = {
 			scroll_docs_up = "<C-k>",
@@ -51,9 +51,6 @@ local default_options = {
 		-- fzf-lua: will use fzf-lua if that feature is not disabled in "disable_feature"
 		lsp = {
 			signature_help = "<C-s>", -- default
-			goto_definition = "gd",
-			goto_implementation = "gI",
-			goto_type_definition = "gt",
 			hover_documentation = "K",
 			hover_diagnostics = "<c-w><c-d>", -- default
 			goto_declaration = "gD",
@@ -64,11 +61,17 @@ local default_options = {
 			format = "<cr>",
 			toggle_diagnostics = "<leader>ld",
 			toggle_inlay_hints = "<leader>lh",
+			goto_definition = "gd", -- default
 			code_rename = "grn", -- default
-			code_action = "gra", -- default
+			code_action = "gra", -- default fzf-lua
 			goto_references = "grr", -- default fzf-lua
-			document_symbols = "<leader>ld", -- fzf-lua
-			workspace_symbols = "<leader>lw", -- fzf-lua
+			goto_implementation = "gri", -- default
+      outgoing_calls = "gro", -- fzf-lua
+      incoming_calls = "grc", -- fzf-lua
+			goto_type_definition = "grt",
+      type_hierarchy = "grh",
+			document_symbols = "grS", -- fzf-lua
+			workspace_symbols = "grs", -- fzf-lua
 		},
 	},
 	icons = {
