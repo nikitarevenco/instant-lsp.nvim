@@ -8,8 +8,6 @@ local default_options = {
 		ts_context = false,
 		ts_autotag = false,
 		autopairs = false,
-		-- When set to `false`, it will use fzf-lua plugin for some LSP commands like "find references" or "find symbols"
-		fzf_lua = false,
 	},
 	misc = {
 		format_on_save = false,
@@ -48,7 +46,6 @@ local default_options = {
 			goto_prev_snippet_placeholder = "<C-h>",
 		},
     -- default-11: default keybindings as of Neovim 0.11 -- ability to configure will be gone when Neovim 0.12 is out
-		-- fzf-lua: will use fzf-lua if that feature is not disabled in "disable_feature"
 		lsp = {
 			signature_help = "<C-s>", -- default-11
 			hover_documentation = "K",
@@ -63,15 +60,15 @@ local default_options = {
 			toggle_inlay_hints = "<leader>lh",
 			goto_definition = "gd",
 			code_rename = "grn", -- default-11
-			code_action = "gra", -- default-11 fzf-lua
-			goto_references = "grr", -- default-11 fzf-lua
+			code_action = "gra", -- default-11
+			goto_references = "grr", -- default-11
 			goto_implementation = "gri", -- default-11
-      outgoing_calls = "gro", -- fzf-lua
-      incoming_calls = "grc", -- fzf-lua
+      outgoing_calls = "gro",
+      incoming_calls = "grc",
 			goto_type_definition = "grt",
       type_hierarchy = "grh",
-			document_symbols = "grS", -- fzf-lua
-			workspace_symbols = "grs", -- fzf-lua
+			document_symbols = "grS",
+			workspace_symbols = "grs",
 		},
 	},
 	icons = {
@@ -156,7 +153,6 @@ function M.setup(custom_opts)
 		require("instant-lsp.base.treesitter")(custom_opts),
 		require("instant-lsp.base.formatting")(custom_opts),
 		require("instant-lsp.base.linting")(custom_opts),
-		require("instant-lsp.base.fzf")(custom_opts),
 	}
 
 	for _, lang in ipairs(custom_opts.languages == "all" and languages or custom_opts.languages) do

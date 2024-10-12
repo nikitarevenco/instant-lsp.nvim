@@ -39,7 +39,7 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.code_action,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.incoming_calls or "<cmd>FzfLua lsp_incoming_calls<cr>",
+		vim.lsp.buf.incoming_calls,
 		{ buffer = event.buf, desc = "LSP: Incoming Calls", nowait = true }
 	)
 
@@ -53,14 +53,14 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.code_action,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.outgoing_calls or "<cmd>FzfLua lsp_outgoing_calls<cr>",
+		vim.lsp.buf.outgoing_calls,
 		{ buffer = event.buf, desc = "LSP: Outgoing Calls", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.code_action,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.code_action or "<cmd>FzfLua lsp_code_actions<cr>",
+		vim.lsp.buf.code_action,
 		{ buffer = event.buf, desc = "LSP: Code Action", nowait = true }
 	)
 
@@ -74,23 +74,22 @@ local function setup_lsp_keymaps(opts, event)
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.goto_references,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.references or "<cmd>FzfLua lsp_references<cr>",
-		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true, expr = opts.disable_feature.fzf_lua }
+		vim.lsp.buf.references,
+		{ buffer = event.buf, desc = "LSP: Goto References", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.document_symbols,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.document_symbol or "<cmd>FzfLua lsp_document_symbols<cr>",
-		{ buffer = event.buf, desc = "LSP: Document Symbols", nowait = true, expr = opts.disable_feature.fzf_lua }
+		vim.lsp.buf.document_symbol,
+		{ buffer = event.buf, desc = "LSP: Document Symbols", nowait = true }
 	)
 
 	vim.keymap.set(
 		"n",
 		opts.keys.lsp.workspace_symbols,
-		opts.disable_feature.fzf_lua and vim.lsp.buf.workspace_symbol
-			or "<cmd>lua require('fzf-lua').lsp_workspace_symbols({ file_ignore_patterns = { '.contentlayer', '.next' } })<cr>",
-		{ buffer = event.buf, desc = "LSP: Workspace Symbols", nowait = true, expr = opts.disable_feature.fzf_lua }
+		vim.lsp.buf.workspace_symbol,
+		{ buffer = event.buf, desc = "LSP: Workspace Symbols", nowait = true }
 	)
 
 	vim.keymap.set(
