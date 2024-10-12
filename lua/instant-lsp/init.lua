@@ -47,25 +47,25 @@ local default_options = {
 			goto_next_snippet_placeholder = "<C-l>",
 			goto_prev_snippet_placeholder = "<C-h>",
 		},
-		-- default: default keybinding as set by neovim in https://github.com/neovim/neovim/blob/master/runtime/lua/vim/_defaults.lua
+    -- default-11: default keybindings as of Neovim 0.11 -- ability to configure will be gone when Neovim 0.12 is out
 		-- fzf-lua: will use fzf-lua if that feature is not disabled in "disable_feature"
 		lsp = {
-			signature_help = "<C-s>", -- default
+			signature_help = "<C-s>", -- default-11
 			hover_documentation = "K",
-			hover_diagnostics = "<c-w><c-d>", -- default
+			hover_diagnostics = "<c-w><c-d>",
 			goto_declaration = "gD",
-			goto_prev_diagnostic = "[d", -- default
-			goto_next_diagnostic = "]d", -- default
-			goto_first_diagnostic = "[D", -- default
-			goto_last_diagnostic = "]D", -- default
+			goto_prev_diagnostic = "[d",
+			goto_next_diagnostic = "]d",
+			goto_first_diagnostic = "[D",
+			goto_last_diagnostic = "]D",
 			format = "<cr>",
 			toggle_diagnostics = "<leader>ld",
 			toggle_inlay_hints = "<leader>lh",
-			goto_definition = "gd", -- default
-			code_rename = "grn", -- default
-			code_action = "gra", -- default fzf-lua
-			goto_references = "grr", -- default fzf-lua
-			goto_implementation = "gri", -- default
+			goto_definition = "gd",
+			code_rename = "grn", -- default-11
+			code_action = "gra", -- default-11 fzf-lua
+			goto_references = "grr", -- default-11 fzf-lua
+			goto_implementation = "gri", -- default-11
       outgoing_calls = "gro", -- fzf-lua
       incoming_calls = "grc", -- fzf-lua
 			goto_type_definition = "grt",
