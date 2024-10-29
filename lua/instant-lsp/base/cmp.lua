@@ -26,8 +26,7 @@ return function(custom_opts)
 			end,
 		},
 		{
-			"yioneko/nvim-cmp",
-			branch = "perf",
+			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
 			dependencies = {
 				{ "hrsh7th/cmp-buffer" },
