@@ -7,6 +7,14 @@ return function(custom_opts)
       },
     },
     {
+      "mfussenegger/nvim-lint",
+      opts = {
+        linters_by_ft = {
+          rust = { "clippy" }
+        }
+      },
+    },
+    {
       "hrsh7th/nvim-cmp",
       dependencies = {
         {
