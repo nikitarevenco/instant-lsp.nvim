@@ -1,7 +1,7 @@
 # instant-lsp.nvim
 
-> [!NOTE]
-> This plugin is in beta!
+> [!WARNING]
+> I use helix now, so this plugin won't be worked on any longer. Feel free to fork!
 
 This is a meta-plugin which configures other plugins for you. With 1 line of code you can setup LSP for 49 available languages (also includes linters, formatters, completion, customisable keybindings for a lot of languages)
 
